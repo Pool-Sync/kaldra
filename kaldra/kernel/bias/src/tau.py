@@ -22,7 +22,7 @@ def estimate_confidence(delta12: List[float]) -> float:
 
     # Simple normalization: multiply by a factor to scale the typical range.
     # Clip the value to ensure it stays within the [0, 1] bounds.
-    confidence = max(0.0, min(1.0, raw_confidence * 3.0))
+    confidence = max(0.0, min(1.0, raw_confidence * 10.0))
 
     return confidence
 
