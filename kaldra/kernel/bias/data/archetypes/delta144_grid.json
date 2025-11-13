@@ -1,0 +1,86 @@
+[
+  {
+    "id": "A01",
+    "jung": "Inocente",
+    "hero_stage": "Chamado à Aventura",
+    "description": "",
+    "labels": []
+  },
+  {
+    "id": "A02",
+    "jung": "Sábio",
+    "hero_stage": "Chamado à Aventura",
+    "description": "",
+    "labels": []
+  },
+  {
+    "id": "A03",
+    "jung": "Explorador",
+    "hero_stage": "Chamado à Aventura",
+    "description": "",
+    "labels": []
+  },
+  {
+    "id": "A04",
+    "jung": "Herói",
+    "hero_stage": "Chamado à Aventura",
+    "description": "",
+    "labels": []
+  },
+  {
+    "id": "A05",
+    "jung": "Fora-da-Lei",
+    "hero_stage": "Chamado à Aventura",
+    "description": "",
+    "labels": []
+  },
+  {
+    "id": "A06",
+    "jung": "Mago",
+    "hero_stage": "Chamado à Aventura",
+    "description": "",
+    "labels": []
+  },
+  {
+    "id": "A07",
+    "jung": "Amante",
+    "hero_stage": "Chamado à Aventura",
+    "description": "",
+    "labels": []
+  },
+  {
+    "id": "A08",
+    "jung": "Governante",
+    "hero_stage": "Chamado à Aventura",
+    "description": "",
+    "labels": []
+  },
+  {
+    "id": "A09",
+    "jung": "Cuidador",
+    "hero_stage": "Chamado à Aventura",
+    "description": "",
+    "labels": []
+  },
+  {
+    "id": "A10",
+    "jung": "Bobo",
+    "hero_stage": "Chamado à Aventura",
+    "description": "",
+    "labels": []
+  },
+  {
+    "id": "A11",
+    "jung": "Cara Comum",
+    "hero_stage": "Chamado à Aventura",
+    "description": "",
+    "labels": []
+  },
+  {
+    "id": "A12",
+    "jung": "Criador",
+    "hero_stage": "Chamado à Aventura",
+    "description": "",
+    "labels": []
+  }
+]

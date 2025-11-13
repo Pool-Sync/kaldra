@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "Inocente",
+    "summary": "Busca bondade, simplicidade e pureza.",
+    "labels": []
+  },
+  {
+    "id": 2,
+    "name": "Sábio",
+    "summary": "Busca verdade, compreensão e clareza.",
+    "labels": []
+  },
+  {
+    "id": 3,
+    "name": "Explorador",
+    "summary": "Busca liberdade, descoberta e aventura.",
+    "labels": []
+  },
+  {
+    "id": 4,
+    "name": "Herói",
+    "summary": "Busca maestria, coragem e superação.",
+    "labels": []
+  },
+  {
+    "id": 5,
+    "name": "Fora-da-Lei",
+    "summary": "Busca libertação, revolução e disrupção.",
+    "labels": []
+  },
+  {
+    "id": 6,
+    "name": "Mago",
+    "summary": "Busca poder, transformação e conhecimento.",
+    "labels": []
+  },
+  {
+    "id": 7,
+    "name": "Amante",
+    "summary": "Busca intimidade, conexão e paixão.",
+    "labels": []
+  },
+  {
+    "id": 8,
+    "name": "Governante",
+    "summary": "Busca controle, ordem e estabilidade.",
+    "labels": []
+  },
+  {
+    "id": 9,
+    "name": "Cuidador",
+    "summary": "Busca serviço, compaixão e proteção.",
+    "labels": []
+  },
+  {
+    "id": 10,
+    "name": "Bobo",
+    "summary": "Busca alegria, humor e espontaneidade.",
+    "labels": []
+  },
+  {
+    "id": 11,
+    "name": "Cara Comum",
+    "summary": "Busca pertencimento, realismo e empatia.",
+    "labels": []
+  },
+  {
+    "id": 12,
+    "name": "Criador",
+    "summary": "Busca inovação, imaginação e expressão.",
+    "labels": []
+  }
+]
