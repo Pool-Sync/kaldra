@@ -1,16 +1,15 @@
 import uvicorn
 import sys
 from pathlib import Path
+from typing import Optional
 from fastapi import FastAPI
 from pydantic import BaseModel
 
 # Add the 'src' directory to the Python path to allow for absolute imports
-# This makes the API runnable from the 'api' directory as well.
 sys.path.append(str(Path(__file__).parent.parent / "src"))
 
 # Now we can import from the 'src' package
 from pipeline import analyze_text
-
 
 # Create the FastAPI application instance
 app = FastAPI(
@@ -27,7 +26,7 @@ class InputPayload(BaseModel):
 
 class OutputPayload(BaseModel):
     """Defines the structure of the JSON response."""
-    bias_score: float
+    bias_score: Optional[float]
     label: str
     confidence: float
     dominant_archetype: str
@@ -59,6 +58,5 @@ def detect_bias(payload: InputPayload):
 if __name__ == "__main__":
     """
     Allows the application to be run directly using `python main.py`.
-    Useful for local development and testing.
     """
     uvicorn.run(app, host="0.0.0.0", port=8000)
