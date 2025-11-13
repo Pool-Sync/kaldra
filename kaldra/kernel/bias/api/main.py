@@ -1,6 +1,16 @@
 import uvicorn
+import sys
+from pathlib import Path
 from fastapi import FastAPI
 from pydantic import BaseModel
+
+# Add the 'src' directory to the Python path to allow for absolute imports
+# This makes the API runnable from the 'api' directory as well.
+sys.path.append(str(Path(__file__).parent.parent / "src"))
+
+# Now we can import from the 'src' package
+from pipeline import analyze_text
+
 
 # Create the FastAPI application instance
 app = FastAPI(
@@ -29,19 +39,19 @@ class OutputPayload(BaseModel):
 @app.post("/bias/detect", response_model=OutputPayload)
 def detect_bias(payload: InputPayload):
     """
-    Accepts a text payload and returns a mocked bias detection response.
-
-    In this MVP version, the actual detection logic is not implemented.
-    The endpoint returns a fixed, placeholder JSON object.
+    Accepts a text payload and returns the result from the analysis pipeline.
     """
-    # Mocked response for the MVP
+    # Call the analysis pipeline with the input text
+    analysis_result = analyze_text(payload.text)
+
+    # Populate the output model with the results from the pipeline
     return OutputPayload(
-        bias_score=0.1,
-        label="neutral",
-        confidence=0.5,
-        dominant_archetype="Inocente",
-        plan=3,
-        explanation="Placeholder response. The detection logic is not yet implemented."
+        bias_score=analysis_result["bias_score"],
+        label=analysis_result["label"],
+        confidence=analysis_result["confidence"],
+        dominant_archetype=analysis_result["dominant_archetype"],
+        plan=analysis_result["plan"],
+        explanation=analysis_result["explanation"]
     )
 
 # --- Main execution block ---
