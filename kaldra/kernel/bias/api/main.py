@@ -13,7 +13,7 @@ from pipeline import analyze_text
 app = FastAPI(
     title="KALDRA-Bias API",
     description="API for detecting bias in text using the KALDRA-Bias model.",
-    version="0.2.0", # Version updated to reflect new output structure
+    version="0.3.0", # Version updated to reflect full pipeline integration
 )
 
 # --- Pydantic Models ---
@@ -48,36 +48,24 @@ class OutputPayload(BaseModel):
 @app.post("/bias/detect", response_model=OutputPayload)
 def detect_bias(payload: InputPayload):
     """
-    Accepts a text payload and returns the result from the analysis pipeline,
-    formatted according to the v0.2 output structure.
+    Accepts a text payload and returns the full, structured result from the
+    analysis pipeline.
     """
+    # Call the analysis pipeline to get the full dictionary of results
     analysis_result = analyze_text(payload.text)
 
-    # --- Map Pipeline Output to API Output ---
-    # Create placeholder data for the new fields not yet in the pipeline
-    placeholder_signals = Signals(
-        intensity=analysis_result.get("intensity", 0.0),
-        polarization=analysis_result.get("polarization", 0.0),
-        emotion_hint=analysis_result.get("emotion_hint", "N/A"),
-        attack_target=analysis_result.get("attack_target", "N/A")
-    )
-
-    placeholder_explanations = ExplanationLayers(
-        human=analysis_result.get("explanation", "Placeholder explanation."),
-        technical="Technical explanation not yet implemented.",
-        symbolic="Symbolic explanation not yet implemented."
-    )
-
+    # The pipeline now returns a dictionary that directly matches the fields
+    # needed by the Pydantic models. We can unpack it directly.
     return OutputPayload(
         bias_score=analysis_result["bias_score"],
         label=analysis_result["label"],
         confidence=analysis_result["confidence"],
-        risk_level=analysis_result.get("risk_level", "low"), # Placeholder
+        risk_level=analysis_result["risk_level"],
         dominant_archetype=analysis_result["dominant_archetype"],
         plan=analysis_result["plan"],
         archetype_detail=analysis_result["archetype_detail"],
-        explanation_layers=placeholder_explanations,
-        signals=placeholder_signals
+        explanation_layers=analysis_result["explanation_layers"],
+        signals=analysis_result["signals"]
     )
 
 # --- Main execution block ---
