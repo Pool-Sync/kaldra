@@ -1,18 +1,23 @@
 import json
 from pathlib import Path
+from typing import Tuple, List
 
-# --- Constants ---
-# Construct the path to the data directory relative to this file.
-# This makes the path resolution robust to where the script is run from.
+# --- Paths ---
+
 DATA_PATH = Path(__file__).parent.parent / "data" / "archetypes"
 LOCALES_MAP_PATH = DATA_PATH / "locales_map.json"
 CULTURAL_3X48_PATH = DATA_PATH / "cultural_3x48.json"
 
-# --- Data Loading ---
 
-def _load_json_data():
+def _load_json_data() -> Tuple[dict, dict]:
     """
-    Loads the necessary JSON files for cultural modulation.
+    Carrega os artefatos de modulação cultural.
+
+    - locales_map.json  → mapeia locale para cultura + plano 3/6/9
+    - cultural_3x48.json → pesos/vetores culturais por plano (stub em v0.5)
+
+    Em v0.5 estes pesos ainda são placeholders. A função precisa ser
+    robusta caso o arquivo esteja vazio ou parcial.
     """
     with open(LOCALES_MAP_PATH, "r", encoding="utf-8") as f:
         locales_map = json.load(f)
@@ -22,41 +27,66 @@ def _load_json_data():
 
     return locales_map, cultural_weights
 
-# Load the data once when the module is imported
-LOCALES_MAP, CULTURAL_WEIGHTS = _load_json_data()
 
-# --- Main Function ---
+# Carregamento único em import
+_LOCALES_MAP, _CULTURAL_WEIGHTS = _load_json_data()
 
-def apply_kindra(delta12: list[float], locale: str) -> tuple[list[float], int]:
+
+def _resolve_plan_for_locale(locale: str) -> int:
     """
-    Applies cultural modulation to a 12-dimensional archetypal vector.
+    Resolve o plano 3/6/9 a partir do locale.
 
-    This v0.1 implementation is a placeholder. It identifies the correct
-    cultural "plan" based on the locale but does not yet apply any actual
-    weighting. The `cultural_3x48.json` is loaded but not used.
+    Se o locale não existir no mapa, cai no fallback "en" e,
+    em último caso, no plano 3.
+    """
+    fallback = {"plan": 3}
+    culture_info = _LOCALES_MAP.get(locale) or _LOCALES_MAP.get("en", fallback)
+    plan = culture_info.get("plan", 3)
+    return int(plan)
+
+
+def _get_plan_weights(plan: int) -> List[float]:
+    """
+    Retorna os pesos culturais associados ao plano.
+
+    Em v0.5, `cultural_3x48.json` pode estar vazio ou apenas com chaves
+    `plan_3`, `plan_6`, `plan_9` sem conteúdo. Neste caso, retornamos
+    uma lista vazia e a modulação é efetivamente neutra (no-op).
+
+    Esta função existe para preparar o terreno para a v0.6, onde os
+    pesos terão efeito real sobre o vetor Δ12.
+    """
+    key = f"plan_{plan}"
+    weights = _CULTURAL_WEIGHTS.get(key, [])
+    # Garantir tipo list mesmo se vier algo inesperado.
+    if not isinstance(weights, list):
+        return []
+    return weights
+
+
+def apply_kindra(delta12: List[float], locale: str) -> Tuple[List[float], int]:
+    """
+    Aplica a camada Kindra (3×48) a um vetor Δ12.
+
+    v0.5 (infra de drift):
+    - Resolve o plano cultural (3/6/9) com base no locale.
+    - Carrega os pesos correspondentes ao plano, se existirem.
+    - Se não houver pesos ou o tamanho não for compatível, retorna
+      o vetor original (no-op) + o plano, mantendo estabilidade.
 
     Args:
-        delta12: The 12-dimensional archetypal vector.
-        locale: The locale string (e.g., "pt-BR", "en") to determine the
-                cultural plan. Defaults to "en" if not found.
+        delta12: vetor Δ12 (12 dimensões arquetípicas).
+        locale: string de locale (ex.: "pt-BR", "en", "es").
 
     Returns:
-        A tuple containing:
-        - The modulated 12-dimensional vector (currently unmodified).
-        - The integer of the cultural plan used (e.g., 3, 6, 9).
+        (delta12_modulado, plan)
     """
-    # 1. Determine the cultural plan from the locale
-    # Default to 'en' if the locale is not found in the map
-    culture_info = LOCALES_MAP.get(locale, LOCALES_MAP.get("en", {"plan": 3}))
-    plan = culture_info["plan"]
+    plan = _resolve_plan_for_locale(locale)
+    plan_weights = _get_plan_weights(plan)
 
-    # 2. Select the corresponding weights (currently placeholder)
-    # The key in cultural_weights is, e.g., "plan_3"
-    # plan_weights = CULTURAL_WEIGHTS.get(f"plan_{plan}", [])
+    # v0.5: modulação neutra. Apenas preparamos a infra.
+    # Quando os pesos forem calibrados (v0.6), a lógica de multiplicação
+    # entrará aqui, respeitando o tamanho de delta12.
+    modulated_delta12 = list(delta12)
 
-    # 3. Apply the modulation (v0.1 - no-op)
-    # In the future, this section will multiply delta12 by the plan_weights.
-    modulated_delta12 = delta12  # No modification in this version
-
-    # 4. Return the modulated vector and the plan number
     return modulated_delta12, plan
