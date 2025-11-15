@@ -11,6 +11,9 @@ from .scorer import compute_bias_score
 from .tau import apply_tau_policy
 from .explain import build_explanation_layers
 from .delta144_mapping import map_to_delta144
+from .settings import get_settings
+from .logging_config import get_logger
+
 
 # --- Pre-load metadata ---
 def _load_archetype_meta():
@@ -102,3 +105,72 @@ def analyze_text(text: str, locale: str = "pt-BR") -> dict:
         "explanation_layers": explanation_layers,
         "signals": signals,
     }
+
+def analyze_batch(texts, locale: str = "pt-BR"):
+    """
+    Runs the full KALDRA-Bias analysis pipeline on a batch of texts.
+
+    - texts: sequência de strings (lista ou tupla).
+    - locale: locale padrão para toda a batch (ex.: "pt-BR").
+
+    Regras v0.5:
+    - Se texts não for lista/tupla, levanta TypeError.
+    - Se batch estiver vazia, retorna lista vazia.
+    - Se batch tiver mais itens que o limite configurado, corta para o limite.
+    - Se um item não for string, faz cast para str.
+    - Se um texto ultrapassar o limite de caracteres, ele é truncado.
+    - Para cada texto, delega para analyze_text() e agrega os resultados em lista.
+    """
+    settings = get_settings()
+    logger = get_logger()
+
+    # Validação básica do tipo de entrada
+    if not isinstance(texts, (list, tuple)):
+        raise TypeError("texts must be a list or tuple of strings.")
+
+    total_items = len(texts)
+
+    if total_items == 0:
+        logger.debug("analyze_batch() chamado com batch vazia.")
+        return []
+
+    # Aplicar limite de tamanho da batch
+    if total_items > settings.batch_max_items:
+        logger.warning(
+            "Batch com %d itens excede o limite configurado (%d). "
+            "A batch será truncada.",
+            total_items,
+            settings.batch_max_items,
+        )
+        texts = list(texts[: settings.batch_max_items])
+
+    results = []
+
+    for idx, raw_text in enumerate(texts):
+        # Garantir que cada item seja string
+        if not isinstance(raw_text, str):
+            logger.warning(
+                "Item na posição %d não é string (tipo: %s). "
+                "Será convertido para string.",
+                idx,
+                type(raw_text).__name__,
+            )
+            text = str(raw_text)
+        else:
+            text = raw_text
+
+        # Truncar texto se ultrapassar o limite de caracteres
+        if len(text) > settings.text_max_length_chars:
+            logger.warning(
+                "Texto na posição %d excede o limite de %d caracteres. "
+                "Texto será truncado.",
+                idx,
+                settings.text_max_length_chars,
+            )
+            text = text[: settings.text_max_length_chars]
+
+        # Delegar para a pipeline unitária existente
+        result = analyze_text(text, locale=locale)
+        results.append(result)
+
+    return results
