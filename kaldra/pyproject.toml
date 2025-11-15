@@ -9,4 +9,5 @@ dependencies = [
     "scikit-learn",
     "sentence-transformers",
     "joblib",
+    "loguru>=0.7.0",
 ]
