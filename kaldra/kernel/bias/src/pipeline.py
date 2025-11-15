@@ -53,8 +53,8 @@ def compute_signals(label: str, bias_score: Optional[float], confidence: float) 
 
 def compute_risk_level(label: str, bias_score: Optional[float], confidence: float) -> str:
     """Computes a simple risk level based on score and confidence."""
-    if label == "inconclusive" or bias_score is None:
-        return "indefinido"
+    if label == "inconclusive" or label == "unknown" or bias_score is None:
+        return "indefinido" if label == "inconclusive" else "low"
 
     score = bias_score * confidence
     if score < 0.3:
@@ -74,7 +74,26 @@ def analyze_text(text: str, locale: str = "pt-BR", settings: Optional[BiasSettin
     if settings is None:
         settings = get_settings()
 
-    text_length = len(text or "")
+    # Handle empty text case
+    if not text or not text.strip():
+        logger.warning("analyze_text called with empty or whitespace-only text.")
+        return {
+            "bias_score": 0.0,
+            "label": "unknown",
+            "confidence": 0.0,
+            "risk_level": "low",
+            "dominant_archetype": "indefinido",
+            "plan": 3,
+            "archetype_detail": {},
+            "explanation_layers": {
+                "human": "Texto vazio ou inválido.",
+                "technical": "Entrada vazia, retornando resultado seguro.",
+                "symbolic": "Nenhuma análise simbólica aplicável."
+            },
+            "signals": compute_signals("unknown", 0.0, 0.0),
+        }
+
+    text_length = len(text)
     logger.debug(
         "Analyze_text chamado",
         extra={"event": "analyze_text_start", "locale": locale, "text_length": text_length},
@@ -136,13 +155,8 @@ def analyze_batch(
     MAX_LEN_FOR_LOG = 5000
 
     for idx, text in enumerate(texts):
-        stripped = text.strip()
-        if not stripped:
-            logger.warning(f"[analyze_batch] Texto vazio na posição {idx}; marcando como skipped.")
-            results.append({
-                "input_index": idx, "text": text, "skipped": True, "reason": "empty_text",
-            })
-            continue
+        # The check for empty/whitespace string is now handled inside analyze_text
+        stripped = text
 
         if len(stripped) > MAX_LEN_FOR_LOG:
             logger.warning(
