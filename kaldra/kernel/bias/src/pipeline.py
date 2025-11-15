@@ -4,15 +4,15 @@ from pathlib import Path
 from typing import Optional, List
 
 # --- Import necessary functions from other modules ---
-from .embeddings import get_embedding
-from .delta12 import project_to_delta12
-from .kindra_3x48 import apply_kindra
-from .scorer import compute_bias_score
-from .tau import apply_tau_policy
-from .explain import build_explanation_layers
-from .delta144_mapping import map_to_delta144
-from .settings import get_settings, BiasSettings
-from .logging_config import get_logger
+from kernel.bias.src.embeddings import get_embedding
+from kernel.bias.src.delta12 import project_to_delta12
+from kernel.bias.src.kindra_3x48 import apply_kindra
+from kernel.bias.src.scorer import compute_bias_score
+from kernel.bias.src.tau import apply_tau_policy
+from kernel.bias.src.explain import build_explanation_layers
+from kernel.bias.src.delta144_mapping import map_to_delta144
+from kernel.bias.src.settings import get_settings, BiasSettings
+from kernel.bias.src.logging_config import get_logger
 
 # --- Pre-load metadata ---
 def _load_archetype_meta():

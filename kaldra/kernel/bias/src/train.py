@@ -7,8 +7,7 @@ from sklearn.calibration import CalibratedClassifierCV
 from sklearn.metrics import accuracy_score, f1_score, matthews_corrcoef
 import numpy as np
 
-# Relative import from within the same package
-from embeddings import get_embedding
+from kernel.bias.src.embeddings import get_embedding
 
 # --- Define Paths ---
 BIAS_KERNEL_DIR = Path(__file__).resolve().parent.parent
@@ -31,11 +30,9 @@ def train_calibrated_model_v04():
         return
 
     # 2. Preprocess data
-    # Filter out 'inconclusive' labels for supervised training
     df_supervised = df[df['label'].isin(['biased', 'neutral'])].copy()
     print(f"Filtered for supervised training: {len(df_supervised)} rows")
 
-    # Convert labels to binary format (biased=1, neutral=0)
     df_supervised['label_binary'] = df_supervised['label'].apply(lambda x: 1 if x == 'biased' else 0)
 
     # 3. Generate embeddings (features)
@@ -49,14 +46,14 @@ def train_calibrated_model_v04():
         X, y,
         test_size=0.2,
         random_state=42,
-        stratify=y  # Ensure label distribution is similar in both sets
+        stratify=y
     )
     print(f"Data split: {len(X_train)} training samples, {len(X_val)} validation samples.")
 
     # 5. Train the base Logistic Regression model
     print("Training base Logistic Regression model...")
     model = LogisticRegression(
-        class_weight="balanced",  # Crucial for imbalanced datasets
+        class_weight="balanced",
         max_iter=500,
         C=1.0,
         random_state=42
@@ -66,7 +63,6 @@ def train_calibrated_model_v04():
 
     # 6. Calibrate the model using Platt scaling (sigmoid)
     print("Calibrating model probabilities...")
-    # CalibratedClassifierCV uses cross-validation to fit the calibrator
     calibrated_model = CalibratedClassifierCV(model, method="sigmoid", cv=3)
     calibrated_model.fit(X_train, y_train)
     print("Calibration complete.")
