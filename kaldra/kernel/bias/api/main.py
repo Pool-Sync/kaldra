@@ -2,19 +2,22 @@ import uvicorn
 import sys
 from pathlib import Path
 from typing import Optional, Dict, Any
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 # Add the 'src' directory to the Python path
 sys.path.append(str(Path(__file__).parent.parent / "src"))
 
 from pipeline import analyze_text
+from logging_config import get_logger
 
 app = FastAPI(
     title="KALDRA-Bias API",
     description="API for detecting bias in text using the KALDRA-Bias model.",
-    version="0.3.0", # Version updated to reflect full pipeline integration
+    version="0.3.0",
 )
+
+logger = get_logger()
 
 # --- Pydantic Models ---
 
@@ -51,11 +54,32 @@ def detect_bias(payload: InputPayload):
     Accepts a text payload and returns the full, structured result from the
     analysis pipeline.
     """
-    # Call the analysis pipeline to get the full dictionary of results
-    analysis_result = analyze_text(payload.text)
+    text_preview = payload.text[:120] if payload.text else ""
+    logger.info(
+        "KALDRA-Bias /bias/detect called",
+        extra={
+            "text_preview": text_preview,
+        },
+    )
 
-    # The pipeline now returns a dictionary that directly matches the fields
-    # needed by the Pydantic models. We can unpack it directly.
+    try:
+        analysis_result = analyze_text(payload.text)
+    except Exception as exc:
+        logger.exception("Error in /bias/detect KALDRA-Bias analysis")
+        raise HTTPException(
+            status_code=500,
+            detail="Internal error while running KALDRA-Bias analysis.",
+        ) from exc
+
+    logger.info(
+        "KALDRA-Bias /bias/detect completed",
+        extra={
+            "label": analysis_result.get("label"),
+            "risk_level": analysis_result.get("risk_level"),
+            "plan": analysis_result.get("plan"),
+        },
+    )
+
     return OutputPayload(
         bias_score=analysis_result["bias_score"],
         label=analysis_result["label"],
