@@ -1,7 +1,7 @@
 import json
 import numpy as np
 from pathlib import Path
-from typing import Optional
+from typing import Optional, List
 
 # --- Import necessary functions from other modules ---
 from .embeddings import get_embedding
@@ -11,9 +11,8 @@ from .scorer import compute_bias_score
 from .tau import apply_tau_policy
 from .explain import build_explanation_layers
 from .delta144_mapping import map_to_delta144
-from .settings import get_settings
+from .settings import get_settings, BiasSettings
 from .logging_config import get_logger
-
 
 # --- Pre-load metadata ---
 def _load_archetype_meta():
@@ -67,24 +66,20 @@ def compute_risk_level(label: str, bias_score: Optional[float], confidence: floa
 
 # --- Main Analysis Pipeline ---
 
-def analyze_text(text: str, locale: str = "pt-BR") -> dict:
+def analyze_text(text: str, locale: str = "pt-BR", settings: Optional[BiasSettings] = None) -> dict:
     """
     Runs the full KALDRA-Bias analysis pipeline on a given text.
     """
     logger = get_logger()
+    if settings is None:
+        settings = get_settings()
 
-    # Metadados básicos da entrada (sem logar o texto completo)
     text_length = len(text or "")
     logger.debug(
         "Analyze_text chamado",
-        extra={
-            "event": "analyze_text_start",
-            "locale": locale,
-            "text_length": text_length,
-        },
+        extra={"event": "analyze_text_start", "locale": locale, "text_length": text_length},
     )
 
-    # Execução normal da pipeline
     embedding = get_embedding(text)
     delta12_vector = project_to_delta12(embedding)
     delta12_modulated, plan = apply_kindra(delta12_vector, locale)
@@ -104,86 +99,65 @@ def analyze_text(text: str, locale: str = "pt-BR") -> dict:
     risk_level = compute_risk_level(label, bias_score, confidence)
     signals = compute_signals(label, bias_score, confidence)
     explanation_layers = build_explanation_layers(
-        delta12_modulated,
-        label,
-        bias_score,
-        confidence,
-        dominant_archetype_name,
-        delta144_info,
-        plan,
+        delta12_modulated, label, bias_score, confidence,
+        dominant_archetype_name, delta144_info, plan
     )
 
-    # Log de saída consolidada
     logger.info(
         "Analyze_text concluído",
         extra={
-            "event": "analyze_text_end",
-            "label": label,
-            "risk_level": risk_level,
-            "plan": plan,
-            "dominant_archetype": dominant_archetype_name,
+            "event": "analyze_text_end", "label": label, "risk_level": risk_level,
+            "plan": plan, "dominant_archetype": dominant_archetype_name,
             "confidence": float(confidence),
             "bias_score": float(bias_score) if bias_score is not None else None,
         },
     )
 
     return {
-        "bias_score": bias_score,
-        "label": label,
-        "confidence": confidence,
-        "risk_level": risk_level,
-        "dominant_archetype": dominant_archetype_name,
-        "plan": plan,
-        "archetype_detail": delta144_info,
-        "explanation_layers": explanation_layers,
-        "signals": signals,
+        "bias_score": bias_score, "label": label, "confidence": confidence,
+        "risk_level": risk_level, "dominant_archetype": dominant_archetype_name,
+        "plan": plan, "archetype_detail": delta144_info,
+        "explanation_layers": explanation_layers, "signals": signals,
     }
 
-def analyze_batch(texts, locale: str = "pt-BR"):
+def analyze_batch(
+    texts: list[str],
+    locale: str = "pt-BR",
+    settings: Optional[BiasSettings] = None,
+) -> list[dict]:
     """
-    Runs the full KALDRA-Bias analysis pipeline on a batch of texts.
+    Executa a análise de viés em lote, reaproveitando analyze_text.
     """
-    settings = get_settings()
+    if settings is None:
+        settings = get_settings()
+
     logger = get_logger()
+    results: list[dict] = []
+    MAX_LEN_FOR_LOG = 5000
 
-    if not isinstance(texts, (list, tuple)):
-        raise TypeError("texts must be a list or tuple of strings.")
+    for idx, text in enumerate(texts):
+        stripped = text.strip()
+        if not stripped:
+            logger.warning(f"[analyze_batch] Texto vazio na posição {idx}; marcando como skipped.")
+            results.append({
+                "input_index": idx, "text": text, "skipped": True, "reason": "empty_text",
+            })
+            continue
 
-    total_items = len(texts)
-
-    if total_items == 0:
-        logger.debug("analyze_batch() chamado com batch vazia.")
-        return []
-
-    if total_items > settings.batch_max_items:
-        logger.warning(
-            "Batch com %d itens excede o limite configurado (%d). A batch será truncada.",
-            total_items,
-            settings.batch_max_items,
-        )
-        texts = list(texts[: settings.batch_max_items])
-
-    results = []
-    for idx, raw_text in enumerate(texts):
-        if not isinstance(raw_text, str):
+        if len(stripped) > MAX_LEN_FOR_LOG:
             logger.warning(
-                "Item na posição %d não é string (tipo: %s). Será convertido para string.",
-                idx,
-                type(raw_text).__name__,
+                f"[analyze_batch] Texto muito longo na posição {idx} (len={len(stripped)}); "
+                "processando mesmo assim."
             )
-            text = str(raw_text)
-        else:
-            text = raw_text
 
-        if len(text) > settings.text_max_length_chars:
-            logger.warning(
-                "Texto na posição %d excede o limite de %d caracteres. Texto será truncado.",
-                idx,
-                settings.text_max_length_chars,
-            )
-            text = text[: settings.text_max_length_chars]
+        logger.info(f"[analyze_batch] Analisando item {idx} (len={len(stripped)})")
 
-        result = analyze_text(text, locale=locale)
+        result = analyze_text(text=stripped, locale=locale, settings=settings)
+
+        if isinstance(result, dict) and "input_index" not in result:
+            result["input_index"] = idx
+
         results.append(result)
 
+    logger.info(f"[analyze_batch] Concluído. Itens processados: {len(results)}")
     return results
