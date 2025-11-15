@@ -71,6 +71,20 @@ def analyze_text(text: str, locale: str = "pt-BR") -> dict:
     """
     Runs the full KALDRA-Bias analysis pipeline on a given text.
     """
+    logger = get_logger()
+
+    # Metadados básicos da entrada (sem logar o texto completo)
+    text_length = len(text or "")
+    logger.debug(
+        "Analyze_text chamado",
+        extra={
+            "event": "analyze_text_start",
+            "locale": locale,
+            "text_length": text_length,
+        },
+    )
+
+    # Execução normal da pipeline
     embedding = get_embedding(text)
     delta12_vector = project_to_delta12(embedding)
     delta12_modulated, plan = apply_kindra(delta12_vector, locale)
@@ -90,8 +104,27 @@ def analyze_text(text: str, locale: str = "pt-BR") -> dict:
     risk_level = compute_risk_level(label, bias_score, confidence)
     signals = compute_signals(label, bias_score, confidence)
     explanation_layers = build_explanation_layers(
-        delta12_modulated, label, bias_score, confidence,
-        dominant_archetype_name, delta144_info, plan
+        delta12_modulated,
+        label,
+        bias_score,
+        confidence,
+        dominant_archetype_name,
+        delta144_info,
+        plan,
+    )
+
+    # Log de saída consolidada
+    logger.info(
+        "Analyze_text concluído",
+        extra={
+            "event": "analyze_text_end",
+            "label": label,
+            "risk_level": risk_level,
+            "plan": plan,
+            "dominant_archetype": dominant_archetype_name,
+            "confidence": float(confidence),
+            "bias_score": float(bias_score) if bias_score is not None else None,
+        },
     )
 
     return {
@@ -109,22 +142,10 @@ def analyze_text(text: str, locale: str = "pt-BR") -> dict:
 def analyze_batch(texts, locale: str = "pt-BR"):
     """
     Runs the full KALDRA-Bias analysis pipeline on a batch of texts.
-
-    - texts: sequência de strings (lista ou tupla).
-    - locale: locale padrão para toda a batch (ex.: "pt-BR").
-
-    Regras v0.5:
-    - Se texts não for lista/tupla, levanta TypeError.
-    - Se batch estiver vazia, retorna lista vazia.
-    - Se batch tiver mais itens que o limite configurado, corta para o limite.
-    - Se um item não for string, faz cast para str.
-    - Se um texto ultrapassar o limite de caracteres, ele é truncado.
-    - Para cada texto, delega para analyze_text() e agrega os resultados em lista.
     """
     settings = get_settings()
     logger = get_logger()
 
-    # Validação básica do tipo de entrada
     if not isinstance(texts, (list, tuple)):
         raise TypeError("texts must be a list or tuple of strings.")
 
@@ -134,24 +155,19 @@ def analyze_batch(texts, locale: str = "pt-BR"):
         logger.debug("analyze_batch() chamado com batch vazia.")
         return []
 
-    # Aplicar limite de tamanho da batch
     if total_items > settings.batch_max_items:
         logger.warning(
-            "Batch com %d itens excede o limite configurado (%d). "
-            "A batch será truncada.",
+            "Batch com %d itens excede o limite configurado (%d). A batch será truncada.",
             total_items,
             settings.batch_max_items,
         )
         texts = list(texts[: settings.batch_max_items])
 
     results = []
-
     for idx, raw_text in enumerate(texts):
-        # Garantir que cada item seja string
         if not isinstance(raw_text, str):
             logger.warning(
-                "Item na posição %d não é string (tipo: %s). "
-                "Será convertido para string.",
+                "Item na posição %d não é string (tipo: %s). Será convertido para string.",
                 idx,
                 type(raw_text).__name__,
             )
@@ -159,17 +175,14 @@ def analyze_batch(texts, locale: str = "pt-BR"):
         else:
             text = raw_text
 
-        # Truncar texto se ultrapassar o limite de caracteres
         if len(text) > settings.text_max_length_chars:
             logger.warning(
-                "Texto na posição %d excede o limite de %d caracteres. "
-                "Texto será truncado.",
+                "Texto na posição %d excede o limite de %d caracteres. Texto será truncado.",
                 idx,
                 settings.text_max_length_chars,
             )
             text = text[: settings.text_max_length_chars]
 
-        # Delegar para a pipeline unitária existente
         result = analyze_text(text, locale=locale)
         results.append(result)
 

@@ -24,6 +24,9 @@ except ImportError:
         get_settings = None  # type: ignore[assignment]
 
 
+# Logger global já configurado com extras (app/env)
+_LOGGER = _logger
+
 _CONFIGURED: bool = False
 
 
@@ -35,7 +38,7 @@ def _configure_logger() -> None:
     - Adiciona saída para stdout.
     - Usa nível vindo de settings, se disponível.
     """
-    global _CONFIGURED
+    global _CONFIGURED, _LOGGER
 
     if _CONFIGURED:
         return
@@ -66,8 +69,8 @@ def _configure_logger() -> None:
         ),
     )
 
-    # Bind de campos padrão
-    _logger.bind(app="kaldra-bias", env=env or "local")
+    # Bind de campos padrão (AGORA armazenado em _LOGGER)
+    _LOGGER = _logger.bind(app="kaldra-bias", env=env or "local")
 
     _CONFIGURED = True
 
@@ -83,4 +86,4 @@ def get_logger():
     """
     if not _CONFIGURED:
         _configure_logger()
-    return _logger
+    return _LOGGER
