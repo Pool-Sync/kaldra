@@ -1,20 +1,15 @@
 import uvicorn
-import sys
-from pathlib import Path
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
-# Add the 'src' directory to the Python path
-sys.path.append(str(Path(__file__).parent.parent / "src"))
-
-from pipeline import analyze_text
-from logging_config import get_logger
+from kernel.bias.src.pipeline import analyze_text, analyze_batch
+from kernel.bias.src.logging_config import get_logger
 
 app = FastAPI(
     title="KALDRA-Bias API",
     description="API for detecting bias in text using the KALDRA-Bias model.",
-    version="0.3.0",
+    version="0.5.0",
 )
 
 logger = get_logger()
@@ -23,6 +18,11 @@ logger = get_logger()
 
 class InputPayload(BaseModel):
     text: str
+    locale: str = "pt-BR"
+
+class BatchInputPayload(BaseModel):
+    texts: List[str]
+    locale: str = "pt-BR"
 
 class ExplanationLayers(BaseModel):
     human: str
@@ -36,6 +36,7 @@ class Signals(BaseModel):
     attack_target: str
 
 class OutputPayload(BaseModel):
+    input_index: Optional[int] = None
     bias_score: Optional[float]
     label: str
     confidence: float
@@ -46,24 +47,22 @@ class OutputPayload(BaseModel):
     explanation_layers: ExplanationLayers
     signals: Signals
 
-# --- API Endpoint ---
+# --- API Endpoints ---
+
+@app.get("/health")
+def healthcheck():
+    return {"status": "ok"}
 
 @app.post("/bias/detect", response_model=OutputPayload)
 def detect_bias(payload: InputPayload):
-    """
-    Accepts a text payload and returns the full, structured result from the
-    analysis pipeline.
-    """
     text_preview = payload.text[:120] if payload.text else ""
     logger.info(
         "KALDRA-Bias /bias/detect called",
-        extra={
-            "text_preview": text_preview,
-        },
+        extra={"text_preview": text_preview, "locale": payload.locale},
     )
 
     try:
-        analysis_result = analyze_text(payload.text)
+        analysis_result = analyze_text(payload.text, locale=payload.locale)
     except Exception as exc:
         logger.exception("Error in /bias/detect KALDRA-Bias analysis")
         raise HTTPException(
@@ -80,19 +79,32 @@ def detect_bias(payload: InputPayload):
         },
     )
 
-    return OutputPayload(
-        bias_score=analysis_result["bias_score"],
-        label=analysis_result["label"],
-        confidence=analysis_result["confidence"],
-        risk_level=analysis_result["risk_level"],
-        dominant_archetype=analysis_result["dominant_archetype"],
-        plan=analysis_result["plan"],
-        archetype_detail=analysis_result["archetype_detail"],
-        explanation_layers=analysis_result["explanation_layers"],
-        signals=analysis_result["signals"]
+    return OutputPayload(**analysis_result)
+
+@app.post("/bias/batch_detect", response_model=List[OutputPayload])
+def detect_bias_batch(payload: BatchInputPayload):
+    logger.info(
+        "KALDRA-Bias /bias/batch_detect called",
+        extra={"batch_size": len(payload.texts), "locale": payload.locale},
     )
 
-# --- Main execution block ---
+    try:
+        results = analyze_batch(payload.texts, locale=payload.locale)
+    except Exception as exc:
+        logger.exception("Error in /bias/batch_detect KALDRA-Bias analysis")
+        raise HTTPException(
+            status_code=500,
+            detail="Internal error during batch analysis.",
+        ) from exc
+
+    logger.info(
+        "KALDRA-Bias /bias/batch_detect completed",
+        extra={"processed_items": len(results)},
+    )
+
+    valid_results = [res for res in results if not res.get("skipped")]
+
+    return [OutputPayload(**res) for res in valid_results]
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: kaldra
+Version: 0.5.0
+Requires-Python: >=3.10
+Requires-Dist: fastapi
+Requires-Dist: uvicorn
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: scikit-learn
+Requires-Dist: sentence-transformers
+Requires-Dist: joblib
+Requires-Dist: loguru>=0.7.0
+Requires-Dist: httpx

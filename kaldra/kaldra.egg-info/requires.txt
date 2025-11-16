@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+numpy
+pandas
+scikit-learn
+sentence-transformers
+joblib
+loguru>=0.7.0
+httpx

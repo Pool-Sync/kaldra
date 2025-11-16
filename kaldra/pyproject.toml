@@ -1,5 +1,6 @@
 [project]
 name = "kaldra"
+version = "0.5.0"
 requires-python = ">=3.10"
 dependencies = [
     "fastapi",
@@ -10,4 +11,10 @@ dependencies = [
     "sentence-transformers",
     "joblib",
     "loguru>=0.7.0",
+    "httpx",
 ]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["kernel*"]
+exclude = ["docs", "infra", "core", "mythos"]
