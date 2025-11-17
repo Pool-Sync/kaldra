@@ -13,15 +13,7 @@ from typing import Optional
 
 from loguru import logger as _logger
 
-try:
-    # Import relativo, ajuste o caminho conforme a estrutura real do projeto
-    from kernel.bias.src.settings import get_settings  # type: ignore[import]
-except ImportError:
-    # Fallback genérico quando o pacote é importado de outra forma
-    try:
-        from src.settings import get_settings  # type: ignore[import]
-    except ImportError:
-        get_settings = None  # type: ignore[assignment]
+from .settings import get_settings
 
 
 # Logger global já configurado com extras (app/env)
@@ -80,7 +72,7 @@ def get_logger():
     Retorna o logger global configurado.
 
     Uso típico:
-        from kernel.bias.src.logging_config import get_logger
+        from kaldra.kernel.bias.src.logging_config import get_logger
         logger = get_logger()
         logger.info("mensagem")
     """

@@ -1,7 +1,13 @@
 import pytest
+import sys
+from pathlib import Path
 from fastapi.testclient import TestClient
 
-from kernel.bias.api.main import app
+# Ensure the repository root is available for namespace imports.
+PROJECT_ROOT = Path(__file__).resolve().parents[5]
+sys.path.append(str(PROJECT_ROOT))
+
+from kaldra.kernel.bias.api.main import app
 
 EXPECTED_KEYS = {
     "input_index",

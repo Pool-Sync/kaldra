@@ -7,7 +7,7 @@ from sklearn.calibration import CalibratedClassifierCV
 from sklearn.metrics import accuracy_score, f1_score, matthews_corrcoef
 import numpy as np
 
-from kernel.bias.src.embeddings import get_embedding
+from .embeddings import get_embedding
 
 # --- Define Paths ---
 BIAS_KERNEL_DIR = Path(__file__).resolve().parent.parent
