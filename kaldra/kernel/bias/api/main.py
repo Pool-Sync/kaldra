@@ -3,8 +3,8 @@ from typing import Optional, Dict, Any, List
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
-from kernel.bias.src.pipeline import analyze_text, analyze_batch
-from kernel.bias.src.logging_config import get_logger
+from ..src.pipeline import analyze_text, analyze_batch
+from ..src.logging_config import get_logger
 
 app = FastAPI(
     title="KALDRA-Bias API",
