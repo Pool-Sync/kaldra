@@ -60,6 +60,10 @@ Essa interpretação é sempre contextualizada pela matriz cultural 3×48.
 
 ---
 
+# 📚 Documentação
+
+- [SPEC_KALDRA_ALPHA.md — especificação técnica do kernel KALDRA-Alpha](docs/SPEC_KALDRA_ALPHA.md)
+
 # 📦 Estrutura de Diretórios (v0.5)
 
 kaldra/
