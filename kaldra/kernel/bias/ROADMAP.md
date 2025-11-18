@@ -1,163 +1,161 @@
-# ✅ KALDRA-Bias Roadmap — v0.4 Atualizado
+# KALDRA — ROADMAP OFICIAL (v0.5 → v0.6)
 
-This roadmap documents the development status and planned evolution of the **KALDRA-Bias** module.
-
----
-
-## Phase 1 — Local MVP Kernel (v0.3 concluída / mantida em v0.4)
-
-**Objective:** Deliver a functional, uncertainty-aware, explainable bias detection kernel with a stable API, running locally.
-
-### ✔️ Completed
-
-- Repository scaffolding (`api/`, `src/`, `data/`, `eval/`, `tests/`).
-- Core documentation (`README.md`, `MODEL_CARD.md`, `ROADMAP.md`).
-- FastAPI endpoint `/bias/detect`.
-- Embedding generation (`embeddings.py`).
-- Δ12 projection (`delta12.py`).
-- Cultural modulation structure (3×48) with locale mapping (`kindra_3x48.py`).
-- τ-layer (uncertainty policy) (`tau.py`).
-- Bias scoring v0.1 + Logistic Regression compatibility v0.2 (`scorer.py`).
-- Δ144 symbolic lookup implementation (`delta144_mapping.py`).
-- Three-layer explainability (human, technical, symbolic) (`explain.py`).
-- Signals block (intensity, polarization, emotion_hint, attack_target) (`pipeline.py`).
-- `risk_level` computation.
-- End-to-end pipeline integration (text → response JSON).
-- Basic evaluation script (`eval_kaldra_bias.py`) and prototype dataset (`gold.csv`).
-
-### ⚠️ Still Missing / Pending From Phase 1
-
-- Unit tests (for Δ12, τ-layer, scoring, API).
-- Integration tests (end-to-end, from `/bias/detect`).
-- Local packaging / Dockerization for easy local deployment.
-
-Phase 1 is **functionally complete** but still lacks **robust testing and packaging**.
+Este roadmap descreve a evolução do kernel **KALDRA-Bias**, concluindo a fase operacional v0.5 e abrindo a fase científica v0.6 — o início do **Kernel Universal KALDRA**, conforme definido no documento **PENSADORES**.
 
 ---
 
-## Phase 2 — Dataset Expansion & Model Quality (targets v0.5)
+# 🟩 FASE ATUAL — v0.5 CONCLUÍDA
 
-**Objective:** Improve robustness, accuracy, fairness, and model reliability.
+**Objetivo da v0.5:**  
+Consolidar o KALDRA-Bias como **kernel operacional estável**, com:
+- pipeline unificada  
+- batch inference  
+- API expandida  
+- logging estruturado  
+- embeddings determinísticos  
+- Δ12 estável  
+- Δ144 lookup  
+- Kindras 3×48 estáticos  
+- τ-layer  
+- signals  
+- explicabilidade multilayer  
+- testes de API  
 
-### To Do
-
-- Expand the training dataset significantly (multi-language, multi-domain, multi-demographic).
-- Define proper annotation guidelines for human raters.
-- Add **group fairness metrics**, including:
-  - demographic parity,
-  - equalized odds,
-  - false positive/negative rate gaps.
-- Add stratified evaluation reports inside `eval/metrics.md`.
-- Improve model calibration (Platt scaling, isotonic regression or similar).
-- Transition from LR → more expressive supervised models as the dataset grows.
-- Add cross-validation and basic hyperparameter search.
-- Implement **continuous evaluation** with versioning of:
-  - datasets,
-  - models,
-  - metrics.
-
-### Optional (stretch goals)
-
-- Automatic misclassification analysis.
-- Partial fine-tuning of the embeddings model (sentence-transformers).
+**Status:** ✔️ 100% concluído.
 
 ---
 
-## Phase 3 — Cultural Calibration (3×48) (v0.6)
+# 🟦 PRÓXIMA FASE — v0.6  
+## **Kernel Universal KALDRA (Motor PENSADORES)**
 
-**Objective:** Transform the 3×48 cultural layer from a placeholder into a calibrated, meaningful dimension.
+A v0.6 implementará a primeira versão viva do motor KALDRA, combinando matemática, narrativa, estrutura cultural e física simbólica.
 
-### To Do
+## 🔥 Objetivos centrais da v0.6
 
-- Populate full 3×48 Kindra vectors with:
-  - cultural weights,
-  - cross-cultural adjustments,
-  - domain-specific signatures.
-- Evaluate impact of cultural modulation on:
-  - bias detection accuracy,
-  - group fairness,
-  - overfitting to specific cultures.
-- Introduce locale-informed default thresholds (τ-layer and `risk_level`).
-- Add calibration tooling inside `scripts/` or `eval/`.
+### 1. **Δ12 Dinâmico (não mais estático)**
+- Passar de projeção fixa → projeção dinâmica dependente do texto, contexto e idioma.  
+- Introdução de entropia, curvatura e modulação temporal.
+
+### 2. **Δ144 Dinâmico (campo não-linear 12×12)**
+- Lookup deixa de ser tabela fixa → vira transformação.  
+- Introdução de acoplamentos:
+  - arquetípico  
+  - emocional  
+  - narrativo  
+  - cultural  
+
+- Δ144 passa a evoluir com o texto.
+
+### 3. **Painel Cultural 3×48 com Drift (Kindras vivos)**
+- Substituição completa do sistema estático atual.  
+- Kindras passam a:
+  - mover,  
+  - contrair,  
+  - expandir,  
+  - colapsar,  
+  conforme cultura, época, idioma e intenção narrativa.
+
+### 4. **Motor 3–6–9 Real**
+Implementação direta do modelo PENSADORES:
+
+- **3 (início / entropia / ruptura)**  
+  mapeamento bruto do texto  
+
+- **6 (modulação / trabalho interno / interpretação simbólica)**  
+  *painlevé II*, ressonância, drift cultural  
+
+- **9 (colapso / síntese / verdade narrativa)**  
+  colapso arquetípico, estado final  
+
+*Hoje é rótulo. Na v0.6 vira mecânica real.*
+
+### 5. **Tracy–Widom (TW)**
+- detecção de “anomalias narrativas extremas”  
+- picos carregados  
+- divergências discursivas  
+
+TW será aplicado em:
+- Δ12  
+- Δ144  
+- Kindra drift  
+
+Sinal usado em risk_level e signals.
+
+### 6. **Painlevé II**
+- suavização diferencial  
+- estabilização de deformações culturais  
+- eliminação de ruído narrativo  
+- parte central do “trabalho interno” do plano 6
+
+### 7. **κₚ — Curvatura Cultural**
+Novo escalar matemático:
+- mede afinidade / dissonância cultural do texto  
+- combinado com Δ144 dinâmica  
+
+Usos:  
+- risk_level  
+- cultural shift  
+- geopolítica
+
+### 8. **Campos de Gauge Culturais**
+- introdução de canais invariantes sob mudança cultural  
+- permite comparar textos entre países/regiões  
+- suporte para KALDRA-GEO
+
+### 9. **Máquina de Estados Arquetípica**
+- narrativa passa por estados  
+- deslocamentos (3→6→9)  
+- colapsos  
+- rupturas  
+- transições críticas
+
+### 10. **Exposição Universal para os Módulos**
+Após v0.6, o Kernel Universal alimentará:
+
+| Módulo | Estado pós v0.6 |
+|--------|-------------------|
+| **KALDRA-Bias** | Kernel v1.0 operacional |
+| **KALDRA-Alpha** | Motor narrativo de agentes |
+| **KALDRA-GEO** | Radar geocultural com κₚ e TW |
+| **Kindra-for-Product** | Mapeamento vivo de arquétipos de produto |
 
 ---
 
-## Phase 4 — Symbolic Layer Expansion (Δ144) (v0.7)
+# 🟧 FASES FUTURAS (v0.7 → v1.0)
 
-**Objective:** Strengthen symbolic interpretability (Δ144 + hero journey + archetype semantics).
+## v0.7 — Dataset, Calibration & Cultural Tuning
+- expansão do dataset  
+- tuning cultural 3×48 por domínio  
+- fairness metrics  
+- múltiplos idiomas  
+- calibradores narrativos
 
-### To Do
+## v0.8 — Explainability & Safety
+- feature attribution (Δ12, Δ144)  
+- shift detection temporal  
+- logging simbólico múltiplo níveis  
+- visualizações  
 
-- Complete all **144 entries** of the Δ144 grid.
-- Add deeper descriptive fields:
-  - narrative tone,
-  - emotional axis,
-  - symbolic polarity,
-  - shadow/secondary archetype relationships.
-- Integrate Δ144 attributes into:
-  - `explanation_layers.symbolic`,
-  - `signals`,
-  - optional `risk_level` adjustments.
-- Add a small LLM-powered post-processor for symbolic wording (optional).
+## v0.9 — Integração Total com o Ecossistema KALDRA
+- conectores automáticos  
+- schemas globais  
+- mensagens internas  
+- hooks para Alpha, GEO, Product
 
----
-
-## Phase 5 — Rigorous Explainability & Safety (v0.8)
-
-**Objective:** Make KALDRA-Bias explainability production-grade and auditable.
-
-### To Do
-
-- Add feature attribution (e.g. SHAP/LIME on Δ12 or embedding-level).
-- Add uncertainty visualizations (confidence curves).
-- Add narrative shift detection:
-  - compare Δ12/Δ144 patterns across time windows.
-- Add tamper-resistant logging (e.g. hash-based).
-- Document known failure modes and uncertainty boundaries.
+## v1.0 — Produção Total
+- docker  
+- scaling  
+- registry  
+- CI/CD  
+- observabilidade  
+- multi-região  
 
 ---
 
-## Phase 6 — Integration with KALDRA Ecosystem (v0.9)
+# 🟪 RESUMO
 
-**Objective:** Make KALDRA-Bias a fully pluggable module across the KALDRA stack.
+- **v0.5** = Motor operacional concluído.  
+- **v0.6** = Motor vivo (PENSADORES) + Kernel Universal.  
+- **v0.7–v1.0** = Calibração, fairness, integração e produção.  
 
-### To Do
-
-- Define inter-module data contracts with:
-  - **KALDRA-Cultural-Shift**,
-  - **KALDRA-CrisisMap**,
-  - **KALDRA-StoryGuard**.
-- Create shared JSON schema structures (`/schemas/`).
-- Build an internal messaging contract (local or via cloud functions).
-- Enable KALDRA-Bias to:
-  - feed KALDRA-Cultural-Shift (trend tracking),
-  - provide signals to CrisisMap,
-  - act as a firewall layer for StoryGuard.
-
----
-
-## Phase 7 — Productionization (v1.0+)
-
-### To Do
-
-- Docker-based local deployment.
-- Optional Kubernetes deployment.
-- Logging + monitoring + metrics dashboards.
-- Model registry & versioning.
-- Canary testing for model updates.
-- Multi-language production evaluation (pt-BR, en, es).
-- API rate limiting and auth (JWT or key-based).
-- Scaling strategy (autoscaling, workers, or lightweight edge inference).
-
----
-
-## Version Summary
-
-KALDRA-Bias has evolved from a simple archetypal heuristic (v0.1) into a **symbolic + statistical, uncertainty-aware kernel** (v0.4) with:
-
-- stable API,
-- multi-layer explainability,
-- basic dataset and evaluation,
-- clear roadmap for fairness, culture, and symbolic depth.
-
-The next steps are **data, calibration, and integration**, not more complexity in the core math.
+O roadmap agora reflete exatamente o que está no repositório e todas as direções futuras do ecossistema KALDRA.
