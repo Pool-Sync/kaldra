@@ -1,4 +1,5 @@
 # SPEC — KALDRA-ALPHA (v0.6)
+Documento de especificação inicial do kernel financeiro-narrativo.
 Narrative Intelligence for Markets
 
 ## 1. Objetivo
