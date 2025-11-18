@@ -1,14 +1,3 @@
-NÃO FAÇA NADA ESPERAR MAIS INPUT: ````markdown
-Create directories:
-- kaldra/kernel/alpha/
-- kaldra/kernel/alpha/api/
-- kaldra/kernel/alpha/data/
-- kaldra/kernel/alpha/src/
-- kaldra/kernel/alpha/tests/
-- kaldra/kernel/alpha/docs/
-
-Create file: kaldra/kernel/alpha/docs/alpha_spec.md
-
 # SPEC — KALDRA-ALPHA (v0.6)
 Narrative Intelligence for Markets
 
