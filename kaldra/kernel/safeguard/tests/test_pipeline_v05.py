@@ -6,7 +6,7 @@ from pathlib import Path
 PROJECT_ROOT_PARENT = Path(__file__).resolve().parents[4]
 sys.path.append(str(PROJECT_ROOT_PARENT))
 
-from kaldra.kernel.bias.src.pipeline import analyze_text, analyze_batch
+from kaldra.kernel.safeguard.src.pipeline import analyze_text, analyze_batch
 
 
 EXPECTED_KEYS = {

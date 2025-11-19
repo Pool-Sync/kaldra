@@ -59,7 +59,7 @@ def get_settings() -> BiasSettings:
     Retorna instância única de BiasSettings (cacheada).
 
     Uso típico:
-        from kaldra.kernel.bias.src.settings import get_settings
+        from kaldra.kernel.safeguard.src.settings import get_settings
         settings = get_settings()
     """
     return BiasSettings()

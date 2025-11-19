@@ -7,7 +7,7 @@ from fastapi.testclient import TestClient
 PROJECT_ROOT = Path(__file__).resolve().parents[5]
 sys.path.append(str(PROJECT_ROOT))
 
-from kaldra.kernel.bias.api.main import app
+from kaldra.kernel.safeguard.api.main import app
 
 EXPECTED_KEYS = {
     "input_index",

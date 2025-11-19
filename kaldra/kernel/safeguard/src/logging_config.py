@@ -72,7 +72,7 @@ def get_logger():
     Retorna o logger global configurado.
 
     Uso típico:
-        from kaldra.kernel.bias.src.logging_config import get_logger
+        from kaldra.kernel.safeguard.src.logging_config import get_logger
         logger = get_logger()
         logger.info("mensagem")
     """

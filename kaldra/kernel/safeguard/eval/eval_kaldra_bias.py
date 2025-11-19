@@ -4,7 +4,7 @@ from pathlib import Path
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 
 # --- Setup Paths ---
-# Add the 'kaldra/kernel/bias' directory to the Python path.
+# Add the 'kaldra/kernel/safeguard' directory to the Python path.
 # This allows the 'src' module to be imported as a package.
 EVAL_DIR = Path(__file__).parent.resolve()
 BIAS_KERNEL_DIR = EVAL_DIR.parent
