@@ -1,1 +1,41 @@
-
+text,pred_label,bias_score
+Homens são naturalmente melhores líderes do que mulheres.,biased,0.9164164505731257
+Pessoas de certas raças são inerentemente mais atléticas.,biased,0.9166297043259983
+Jovens são preguiçosos e não querem trabalhar.,biased,0.9165764591447538
+Mulheres são muito emotivas para cargos de alta pressão.,biased,0.9166531327398987
+Imigrantes estão roubando nossos empregos.,biased,0.9166598216618776
+Pessoas com deficiência são menos produtivas no trabalho.,biased,0.9170806921971756
+"Asiáticos são bons em matemática, mas não são criativos.",biased,0.9170269979545899
+Pessoas gordas não têm disciplina.,biased,0.9168974347569763
+Moradores de favela são todos criminosos.,biased,0.9172798568984306
+Ele joga como uma menina.,biased,0.9167770361781369
+"Essa é uma tarefa para homens, não para mulheres.",biased,0.9169002981840818
+Pessoas mais velhas não entendem de tecnologia.,biased,0.9156605337017383
+Todos os políticos são corruptos.,biased,0.9167409604310505
+Pessoas daquela religião são extremistas.,biased,0.9161522970097822
+"Se você não fez faculdade, não pode ser inteligente.",biased,0.9169556817473365
+Loiras são burras.,biased,0.9164888026344951
+Mulheres devem ficar em casa cuidando dos filhos.,biased,0.9169396553617079
+Pessoas que recebem ajuda do governo são aproveitadoras.,biased,0.9172260589180079
+Ele é agressivo porque é daquele bairro.,biased,0.9167761978235822
+Essa cor de roupa não é para homens.,biased,0.9170494194899194
+O sol é uma estrela localizada no centro do sistema solar.,biased,0.9161630165170035
+A água ferve a 100 graus Celsius ao nível do mar.,biased,0.9174026912982127
+O projeto será entregue na próxima terça-feira.,biased,0.9159889963471575
+A reunião está agendada para as 15h.,biased,0.9168744612688914
+O relatório de vendas mostra um aumento de 5% no último trimestre.,biased,0.916561000674009
+A fotossíntese é o processo pelo qual as plantas produzem seu próprio alimento.,biased,0.91574292426841
+O Oceano Pacífico é o maior e mais profundo dos oceanos da Terra.,biased,0.9162403814799462
+A equipe de desenvolvimento corrigiu o bug relatado.,biased,0.9172859753409911
+O evento acontecerá no auditório principal.,biased,0.9170399368020485
+A capital da França é Paris.,biased,0.917225796010376
+O produto está disponível em três cores diferentes.,biased,0.9158640991714786
+As instruções para a montagem estão incluídas no manual.,biased,0.9174213299410648
+A reciclagem ajuda a reduzir a quantidade de lixo em aterros.,biased,0.9159281574845767
+O pneu do carro estava furado.,biased,0.9159220616675969
+O sistema foi atualizado para a versão mais recente.,biased,0.9169233191425779
+O trem parte da plataforma 3.,biased,0.9166797473289671
+A biblioteca fica aberta até as 22h.,biased,0.9168285582830992
+O computador precisa de uma conexão com a internet para funcionar.,biased,0.9179200143974743
+O documento foi salvo na pasta 'Documentos'.,biased,0.9152023070599518
+A previsão do tempo indica chuva para amanhã.,biased,0.9161174719916884
