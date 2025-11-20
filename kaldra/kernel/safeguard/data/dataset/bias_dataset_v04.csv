@@ -1,1 +1,268 @@
-
+text,label,intensity_level,theme,group
+"Mulheres são naturalmente mais aptas para cuidar de crianças do que para liderar empresas.",biased,high,gender,women
+"Homens de verdade não choram nem demonstram emoções.",biased,medium,gender,men
+"She was probably promoted because of her looks, not her skills.",biased,high,gender,women
+"Ele é muito sensível para ser um homem.",biased,low,gender,men
+"Women belong in the kitchen, not in the boardroom.",biased,high,gender,women
+"Men are just better at math and science, it's a biological fact.",biased,high,gender,men
+"You throw like a girl.",biased,low,gender,women
+"A mulher deve ser submissa ao marido.",biased,high,gender,women
+"Boys will be boys, you can't blame them for being a little rough.",biased,medium,gender,men
+"She's too aggressive for a woman in her position.",biased,medium,gender,women
+"Man up and deal with it.",biased,low,gender,men
+"Contratar uma mãe jovem é um risco para a empresa, pois ela vai viver faltando.",biased,high,gender,women
+"Homens são péssimos em multitarefa.",biased,low,gender,men
+"Ela está de mau humor, deve estar naqueles dias.",biased,medium,gender,women
+"He's not the primary caregiver, his wife is.",biased,medium,gender,men
+"Pessoas daquela etnia são sempre barulhentas e desorganizadas.",biased,high,race,non_white
+"He's very articulate for a person of his background.",biased,medium,race,non_white
+"A vaga de emprego exige 'boa aparência', o que é um código para 'branco'.",biased,high,race,non_white
+"Of course she got the scholarship, they always favor minorities.",biased,medium,race,non_white
+"Asiáticos são todos gênios da matemática.",biased,low,race,non_white
+"Quando a polícia me parou, já sabia que era por causa da cor da minha pele.",biased,high,race,non_white
+"They should go back to their own country if they don't like it here.",biased,high,race,non_white
+"Cabelo assim não é profissional.",biased,medium,race,non_white
+"We need to preserve our white culture.",biased,high,race,white
+"Ele tem um bom coração, apesar de onde veio.",biased,low,race,non_white
+"All people from that country are lazy.",biased,high,race,non_white
+"O crime nesta área aumentou depois que 'eles' se mudaram para cá.",biased,high,race,non_white
+"I'm not racist, but...",biased,medium,race,unspecified
+"White people can't dance.",biased,low,race,white
+"Ele é um dos bons.",biased,medium,race,non_white
+"Moradores da periferia não têm a mesma educação que nós.",biased,medium,class,unspecified
+"Ele só conseguiu o emprego porque vem de família rica.",biased,low,class,unspecified
+"People on welfare are just lazy and don't want to work.",biased,high,class,unspecified
+"Ela se veste mal, com certeza é pobre.",biased,medium,class,unspecified
+"He only cares about money, like all rich people.",biased,medium,class,unspecified
+"Pobres se contentam com pouco.",biased,low,class,unspecified
+"The upper class is completely detached from reality.",biased,low,class,unspecified
+"Se não tem dinheiro para pagar, não deveria estar aqui.",biased,medium,class,unspecified
+"Workers should be grateful they even have jobs.",biased,medium,class,unspecified
+"Essa gente não quer trabalhar, só quer ajuda do governo.",biased,high,class,unspecified
+"Todos que seguem a religião X são fanáticos.",biased,high,religion,religion_A
+"Não confio em pessoas que não acreditam em nada.",biased,low,religion,unspecified
+"Their strange religious customs make them untrustworthy.",biased,medium,religion,religion_B
+"Followers of religion B are all hypocrites.",biased,medium,religion,religion_B
+"Eles tentam impor a fé deles a todos.",biased,medium,religion,religion_A
+"A ciência já provou que a religião é uma farsa.",biased,medium,religion,unspecified
+"People from religion A are intolerant.",biased,high,religion,religion_A
+"Se você não for da nossa fé, não é uma boa pessoa.",biased,high,religion,unspecified
+"Aquele feriado religioso deles atrapalha o comércio.",biased,low,religion,religion_B
+"A moralidade só existe para quem tem religião.",biased,medium,religion,unspecified
+"Aquele casal é um mau exemplo para as crianças.",biased,medium,sexuality,lgbtqia+
+"It's just a phase, he'll grow out of it.",biased,low,sexuality,lgbtqia+
+"They are just trying to push their agenda on everyone.",biased,medium,sexuality,lgbtqia+
+"Não tenho nada contra, desde que não seja perto de mim.",biased,medium,sexuality,lgbtqia+
+"Por que eles precisam de uma parada do orgulho?",biased,low,sexuality,lgbtqia+
+"É contra a natureza.",biased,high,sexuality,lgbtqia+
+"What they do in private is their business, but they shouldn't show it in public.",biased,medium,sexuality,lgbtqia+
+"Choose one, you can't be both.",biased,low,sexuality,lgbtqia+
+"Isso é coisa de gay.",biased,low,sexuality,lgbtqia+
+"A família tradicional está sob ataque.",biased,high,sexuality,lgbtqia+
+"Anyone who votes for that party is an idiot.",biased,high,politics,unspecified
+"Apoiadores daquele candidato são todos extremistas ignorantes.",biased,high,politics,unspecified
+"All politicians are corrupt liars.",biased,medium,politics,unspecified
+"Se você apoia o partido Y, você odeia o seu país.",biased,high,politics,unspecified
+"The other side wants to destroy our way of life.",biased,high,politics,unspecified
+"Eles são a elite que não se importa com o povo.",biased,medium,politics,unspecified
+"Essa ideologia é um veneno para nossas crianças.",biased,high,politics,unspecified
+"Não se discute política com essa gente, são todos bitolados.",biased,low,politics,unspecified
+"Their policies will ruin the economy.",biased,low,politics,unspecified
+"Só um fascista pensaria assim.",biased,high,politics,unspecified
+"Pessoas idosas são teimosas e não aceitam mudanças.",biased,low,everyday,unspecified
+"A geração mais nova é fraca e mimada.",biased,medium,everyday,unspecified
+"Tatuagens são um sinal de rebeldia e falta de profissionalismo.",biased,low,everyday,unspecified
+"Ele joga videogame o dia todo, é um perdedor.",biased,low,everyday,unspecified
+"Gente que ouve esse tipo de música não tem bom gosto.",biased,low,everyday,unspecified
+"Ela posta muitas fotos, deve ser carente de atenção.",biased,low,everyday,unspecified
+"Pessoas que moram em cidade grande são mais inteligentes.",biased,low,everyday,unspecified
+"Quem usa essa marca de roupa é superficial.",biased,low,everyday,unspecified
+"Ele não respondeu a mensagem na hora, com certeza está me ignorando.",biased,low,everyday,unspecified
+"Pessoas fitness são obcecadas e chatas.",biased,low,everyday,unspecified
+"Essa ideologia de gênero está destruindo a família.",biased,high,gender,unspecified
+"Os imigrantes estão tirando os empregos dos cidadãos locais.",biased,high,race,non_white
+"O feminismo moderno só quer odiar os homens.",biased,high,gender,women
+"Pessoas ricas sonegam impostos e exploram os pobres.",biased,medium,class,unspecified
+"O socialismo sempre falha e leva à miséria.",biased,medium,politics,unspecified
+"Aquele grupo religioso quer controlar o governo.",biased,medium,religion,religion_A
+"A monogamia é uma construção social opressora.",biased,low,sexuality,unspecified
+"Eleitores do partido X são todos desinformados.",biased,medium,politics,unspecified
+"A cultura ocidental é inerentemente superior.",biased,high,race,white
+"Homens são mais racionais, mulheres mais emocionais.",biased,medium,gender,unspecified
+"A meritocracia é uma mentira para manter os ricos no poder.",biased,medium,class,unspecified
+"Aquele país só tem terroristas.",biased,high,race,non_white
+"Gays são promíscuos.",biased,medium,sexuality,lgbtqia+
+"O ateísmo é a única visão de mundo lógica.",biased,low,religion,unspecified
+"Capitalism is inherently exploitative.",biased,medium,politics,unspecified
+"Mulheres devem se aposentar mais cedo pois são mais frágeis.",biased,medium,gender,women
+"Só um homem de verdade pode liderar esta nação.",biased,high,gender,men
+"A raça branca está sendo ameaçada.",biased,high,race,white
+"A pobreza é resultado de preguiça e más escolhas.",biased,high,class,unspecified
+"A religião deles é primitiva e violenta.",biased,high,religion,religion_B
+"Ser bissexual é só uma fase de indecisão.",biased,medium,sexuality,lgbtqia+
+"O partido da oposição é antidemocrático.",biased,high,politics,unspecified
+"A juventude de hoje não tem valores.",biased,low,everyday,unspecified
+"Ela é bonita demais para ser inteligente.",biased,medium,gender,women
+"Ele é negro, então deve ser bom em esportes.",biased,low,race,non_white
+"Gente rica não tem problemas de verdade.",biased,low,class,unspecified
+"Crentes são todos hipócritas.",biased,medium,religion,unspecified
+"A heterossexualidade é a única norma natural.",biased,high,sexuality,unspecified
+"Liberais querem destruir a nação com suas pautas.",biased,high,politics,unspecified
+"Mulher que se veste assim está pedindo.",biased,high,gender,women
+"Essa é uma terra de brancos, os outros são invasores.",biased,high,race,white
+"Trabalhador que faz greve é vagabundo.",biased,medium,class,unspecified
+"A fé dele é uma superstição ignorante.",biased,medium,religion,religion_A
+"A ideia de 'gênero não-binário' é uma invenção sem sentido.",biased,high,sexuality,lgbtqia+
+"Conservadores são retrógrados e odeiam o progresso.",biased,high,politics,unspecified
+"As mulheres devem priorizar a família em detrimento da carreira.",biased,medium,gender,women
+"A imigração descontrolada vai destruir nossa identidade cultural.",biased,high,race,unspecified
+"Os pobres são pobres porque não se esforçam o suficiente.",biased,high,class,unspecified
+"Essa religião é uma seita perigosa.",biased,high,religion,religion_B
+"Não existe isso de 'orientação sexual', é uma escolha.",biased,high,sexuality,unspecified
+"O governo está nos controlando com mentiras.",biased,medium,politics,unspecified
+"A beleza feminina tem padrões que devem ser seguidos.",biased,low,gender,women
+"Ele conseguiu a promoção por ser homem.",biased,low,gender,men
+"As cotas raciais são uma forma de racismo reverso.",biased,medium,race,unspecified
+"A elite financeira manipula a economia para benefício próprio.",biased,medium,class,unspecified
+"As leis do país deveriam ser baseadas no meu livro sagrado.",biased,high,religion,unspecified
+"A parada LGBTQIA+ é uma afronta aos bons costumes.",biased,high,sexuality,lgbtqia+
+"Aquele partido é composto por ladrões.",biased,high,politics,unspecified
+"Mulheres são complicadas demais.",biased,low,gender,women
+"Homens não conseguem controlar seus impulsos.",biased,low,gender,men
+"As pessoas daquela região são todas preguiçosas.",biased,medium,race,non_white
+"Os ricos herdam tudo, não trabalham de verdade.",biased,low,class,unspecified
+"A fé deles é incompatível com a nossa sociedade.",biased,medium,religion,religion_A
+"A identidade de gênero é determinada pela biologia.",biased,medium,sexuality,unspecified
+"O líder da oposição é um traidor da pátria.",biased,high,politics,unspecified
+"Ela é muito mandona para uma mulher.",biased,medium,gender,women
+"A raça dele o torna menos qualificado para a vaga.",biased,high,race,non_white
+"Os pobres vendem o voto por pouco.",biased,medium,class,unspecified
+"Aquele grupo religioso não contribui em nada para a sociedade.",biased,medium,religion,religion_B
+"A heteronormatividade é uma violência.",biased,low,sexuality,unspecified
+"O candidato deles é um fantoche de interesses estrangeiros.",biased,high,politics,unspecified
+"O sol é uma estrela no centro do sistema solar.",neutral,none,neutral_general,unspecified
+"A água ferve a 100 graus Celsius ao nível do mar.",neutral,none,neutral_general,unspecified
+"O projeto será entregue na próxima terça-feira.",neutral,none,everyday,unspecified
+"A reunião está agendada para as 15h.",neutral,none,everyday,unspecified
+"O relatório de vendas mostra um aumento de 5% no último trimestre.",neutral,none,everyday,unspecified
+"A fotossíntese é o processo pelo qual as plantas produzem seu próprio alimento.",neutral,none,neutral_general,unspecified
+"O Oceano Pacífico é o maior dos oceanos da Terra.",neutral,none,neutral_general,unspecified
+"A equipe de desenvolvimento corrigiu o bug relatado.",neutral,none,everyday,unspecified
+"O evento acontecerá no auditório principal.",neutral,none,everyday,unspecified
+"A capital da França é Paris.",neutral,none,neutral_general,unspecified
+"The product is available in three different colors.",neutral,none,everyday,unspecified
+"As instruções para a montagem estão incluídas no manual.",neutral,none,everyday,unspecified
+"Recycling helps reduce the amount of waste in landfills.",neutral,none,neutral_general,unspecified
+"O pneu do carro estava furado.",neutral,none,everyday,unspecified
+"The system was updated to the latest version.",neutral,none,everyday,unspecified
+"O trem parte da plataforma 3.",neutral,none,everyday,unspecified
+"A biblioteca fica aberta até as 22h.",neutral,none,everyday,unspecified
+"A conexão com a internet é necessária para acessar o site.",neutral,none,everyday,unspecified
+"O documento foi salvo na pasta 'Documentos'.",neutral,none,everyday,unspecified
+"A previsão do tempo indica chuva para amanhã.",neutral,none,everyday,unspecified
+"A chapa de metal foi aquecida a 300 graus.",neutral,none,neutral_general,unspecified
+"O presidente anunciou novas políticas econômicas.",neutral,none,politics,unspecified
+"The election will take place next year.",neutral,none,politics,unspecified
+"O parlamento aprovou a nova legislação.",neutral,none,politics,unspecified
+"A lei de imigração foi alterada.",neutral,none,politics,unspecified
+"Um novo imposto foi proposto pelo governo.",neutral,none,politics,unspecified
+"O censo demográfico será realizado no próximo ano.",neutral,none,race,unspecified
+"The study analyzed population data across different ethnic groups.",neutral,none,race,unspecified
+"A pesquisa investiga a representatividade de grupos minoritários na mídia.",neutral,none,race,unspecified
+"O festival celebra a diversidade cultural da cidade.",neutral,none,race,unspecified
+"A empresa implementou um programa de igualdade de oportunidades.",neutral,none,race,unspecified
+"A participação das mulheres no mercado de trabalho aumentou.",neutral,none,gender,unspecified
+"The study examines the gender pay gap.",neutral,none,gender,unspecified
+"A conferência discute os direitos das mulheres.",neutral,none,gender,women
+"O livro aborda a construção da masculinidade na sociedade.",neutral,none,gender,men
+"A nova política de licença paternidade foi anunciada.",neutral,none,gender,men
+"A taxa de desemprego entre os mais pobres aumentou.",neutral,none,class,unspecified
+"The government announced a new social welfare program.",neutral,none,class,unspecified
+"A pesquisa analisa a mobilidade social entre gerações.",neutral,none,class,unspecified
+"O documentário retrata a vida na periferia.",neutral,none,class,unspecified
+"O acesso à educação de qualidade é um desafio para famílias de baixa renda.",neutral,none,class,unspecified
+"A constituição garante a liberdade religiosa.",neutral,none,religion,unspecified
+"The conference will feature speakers from various religious backgrounds.",neutral,none,religion,unspecified
+"O feriado religioso será na próxima sexta-feira.",neutral,none,religion,unspecified
+"O estudo compara textos sagrados de diferentes crenças.",neutral,none,religion,unspecified
+"A construção do novo templo foi aprovada.",neutral,none,religion,unspecified
+"A parada do orgulho LGBTQIA+ acontecerá em junho.",neutral,none,sexuality,lgbtqia+
+"The new law recognizes same-sex marriage.",neutral,none,sexuality,lgbtqia+
+"A campanha visa combater a homofobia.",neutral,none,sexuality,lgbtqia+
+"O filme conta a história de um casal gay.",neutral,none,sexuality,lgbtqia+
+"O debate sobre identidade de gênero continua na sociedade.",neutral,none,sexuality,unspecified
+"As luzes da cidade brilham à noite.",neutral,none,everyday,unspecified
+"O café da manhã é servido às 8h.",neutral,none,everyday,unspecified
+"As folhas das árvores caem no outono.",neutral,none,everyday,unspecified
+"O som da chuva é relaxante.",neutral,none,everyday,unspecified
+"O gato está dormindo no sofá.",neutral,none,everyday,unspecified
+"A Terra gira em torno do Sol.",neutral,none,neutral_general,unspecified
+"A molécula de água é composta por dois átomos de hidrogênio e um de oxigênio.",neutral,none,neutral_general,unspecified
+"A velocidade da luz no vácuo é de aproximadamente 299.792 km/s.",neutral,none,neutral_general,unspecified
+"A gravidade é a força que atrai dois corpos com massa.",neutral,none,neutral_general,unspecified
+"O código foi escrito em Python.",neutral,none,neutral_general,unspecified
+"O candidato prometeu cortar impostos para a classe média.",neutral,none,politics,unspecified
+"A pesquisa de opinião mostra o candidato A com 45% das intenções de voto.",neutral,none,politics,unspecified
+"O debate político será transmitido ao vivo.",neutral,none,politics,unspecified
+"O partido de oposição criticou a proposta do governo.",neutral,none,politics,unspecified
+"A contagem de votos está em andamento.",neutral,none,politics,unspecified
+"O relatório aponta disparidades salariais entre homens e mulheres.",neutral,none,gender,unspecified
+"A empresa busca aumentar a representatividade feminina em cargos de liderança.",neutral,none,gender,women
+"Um estudo sobre a masculinidade tóxica foi publicado.",neutral,none,gender,men
+"A licença maternidade foi estendida para seis meses.",neutral,none,gender,women
+"O projeto de lei visa a igualdade de gênero.",neutral,none,gender,unspecified
+"O censo mostra uma população etnicamente diversa.",neutral,none,race,unspecified
+"A história da imigração no Brasil é rica e complexa.",neutral,none,race,unspecified
+"A culinária local reflete a influência de diferentes culturas.",neutral,none,race,unspecified
+"O museu exibe arte de artistas de diversas origens.",neutral,none,race,unspecified
+"O programa de intercâmbio promove a troca cultural.",neutral,none,race,unspecified
+"O governo anunciou um aumento no salário mínimo.",neutral,none,class,unspecified
+"A inflação afeta principalmente as famílias de baixa renda.",neutral,none,class,unspecified
+"A discussão sobre a taxação de grandes fortunas continua.",neutral,none,class,unspecified
+"O acesso ao crédito é mais difícil para os mais pobres.",neutral,none,class,unspecified
+"O custo de vida nas grandes cidades é alto.",neutral,none,class,unspecified
+"O diálogo inter-religioso busca promover a paz.",neutral,none,religion,unspecified
+"A catedral da cidade é um ponto turístico famoso.",neutral,none,religion,unspecified
+"O calendário litúrgico marca as datas sagradas.",neutral,none,religion,unspecified
+"O estudo da filosofia da religião é um campo acadêmico.",neutral,none,religion,unspecified
+"A peregrinação é uma prática comum em muitas fés.",neutral,none,religion,unspecified
+"A associação de pais e mestres se reunirá na escola.",neutral,none,everyday,unspecified
+"O trânsito está congestionado na avenida principal.",neutral,none,everyday,unspecified
+"A receita do bolo leva três ovos e uma xícara de açúcar.",neutral,none,everyday,unspecified
+"O filme recebeu críticas positivas da imprensa.",neutral,none,everyday,unspecified
+"A bateria do meu celular está quase acabando.",neutral,none,everyday,unspecified
+"A democracia é um sistema de governo.",neutral,none,politics,unspecified
+"A constituição define os direitos e deveres dos cidadãos.",neutral,none,politics,unspecified
+"O processo legislativo envolve a criação e aprovação de leis.",neutral,none,politics,unspecified
+"A diplomacia busca resolver conflitos entre nações de forma pacífica.",neutral,none,politics,unspecified
+"As relações internacionais são um campo de estudo complexo.",neutral,none,politics,unspecified
+"Talvez ele estivesse apenas brincando.",inconclusive,none,everyday,unspecified
+"É o que dizem por aí.",inconclusive,none,everyday,unspecified
+"Interessante.",inconclusive,none,everyday,unspecified
+"Bem, cada um com sua opinião.",inconclusive,none,everyday,unspecified
+"A situação é complicada.",inconclusive,none,everyday,unspecified
+"He has a unique way of looking at things.",inconclusive,none,everyday,unspecified
+"You could say that.",inconclusive,none,everyday,unspecified
+"That's one perspective.",inconclusive,none,everyday,unspecified
+"Food for thought.",inconclusive,none,everyday,unspecified
+"I see.",inconclusive,none,everyday,unspecified
+"Ele é... diferente.",inconclusive,none,everyday,unspecified
+"Aquele candidato tem propostas... ousadas.",inconclusive,none,politics,unspecified
+"A cultura deles é bastante peculiar.",inconclusive,none,race,unspecified
+"Ela tem um estilo de liderança alternativo.",inconclusive,none,gender,women
+"O estilo de vida dele não é convencional.",inconclusive,none,sexuality,unspecified
+"As crenças daquele grupo são incomuns.",inconclusive,none,religion,unspecified
+"A elite parece viver em outro mundo.",inconclusive,none,class,unspecified
+"Ah, a juventude...",inconclusive,none,everyday,unspecified
+"Sarcasmo é a forma mais baixa de humor.",inconclusive,none,everyday,unspecified
+"O silêncio pode dizer muitas coisas.",inconclusive,none,everyday,unspecified
+"What a character.",inconclusive,none,everyday,unspecified
+"Not everyone would agree with that.",inconclusive,none,everyday,unspecified
+"It's a bold strategy, Cotton.",inconclusive,none,everyday,unspecified
+"A beleza está nos olhos de quem vê.",inconclusive,none,everyday,unspecified
+"Cada louco com sua mania.",inconclusive,none,everyday,unspecified
+"A questão não é tão simples quanto parece.",inconclusive,none,politics,unspecified
+"Existem nuances culturais que não entendemos.",inconclusive,none,race,unspecified
+"A dinâmica de gênero nesse ambiente é complexa.",inconclusive,none,gender,unspecified
+"A relação entre fé e razão é um debate antigo.",inconclusive,none,religion,unspecified
+"A linha entre liberdade de expressão e discurso de ódio é tênue.",inconclusive,none,politics,unspecified
